@@ -114,7 +114,7 @@ if [ -e "$DEPLOYMENT_SOURCE/package.json" ]; then
   cd - > /dev/null
 fi
 # 3. Angular Prod Build
-IF EXIST "$DEPLOYMENT_SOURCE/angular.json"; (
+IF [ -e "$DEPLOYMENT_SOURCE/angular.json" ]; then
 echo Building App in $DEPLOYMENT_SOURCE…
 pushd "$DEPLOYMENT_SOURCE"
 call :ExecuteCmd !NPM_CMD! run build
@@ -122,7 +122,7 @@ call :ExecuteCmd !NPM_CMD! run build
 #:: call ./node_modules/.bin/ng build –prod
 IF !ERRORLEVEL! NEQ 0 goto error
 popd
-)
+fi
 
 
 # 1. KuduSync
